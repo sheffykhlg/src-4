@@ -1,0 +1,65 @@
+{
+  "name": "Save Restricted Content Downloader Bot",
+  "description": "Ultra-fast Telegram Save Restricted Content Downloader developed by @sheffysamra1bot (https://t.me/sheffysamra1bot). Built with Pyrofork, TgCrypto, and MongoDB.",
+  "keywords": [
+    "telegram",
+    "pyrofork",
+    "downloader",
+    "sheffysamra1bot",
+    "batch",
+    "mongodb"
+  ],
+  "website": "https://t.me/sheffysamra1bot",
+  "repository": "https://github.com/sheffykhlg/src-4",
+  "env": {
+    "API_ID": {
+      "description": "Your Telegram API ID from my.telegram.org (Dev: @sheffysamra1bot - https://t.me/sheffysamra1bot)",
+      "value": "12345678",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Your Telegram API Hash from my.telegram.org (Dev: @sheffysamra1bot - https://t.me/sheffysamra1bot)",
+      "value": "0123456789abcdef0123456789abcdef",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Your Telegram Bot Token from @BotFather (Dev: @sheffysamra1bot - https://t.me/sheffysamra1bot)",
+      "value": "1234567890:ABCdefGHIjklMNOpqrsTUVwxyz1234567",
+      "required": true
+    },
+    "MONGO_URI": {
+      "description": "Your MongoDB Atlas Connection String (Dev: @sheffysamra1bot - https://t.me/sheffysamra1bot)",
+      "value": "mongodb+srv://dummy_user:dummy_password@cluster0.dummy.mongodb.net/?retryWrites=true&w=majority",
+      "required": true
+    },
+    "LOG_GROUP_ID": {
+      "description": "Telegram Log Group ID (Optional) | https://t.me/sheffysamra1bot",
+      "value": "-1001234567890",
+      "required": false
+    },
+    "LOG_CHANNEL_ID": {
+      "description": "Telegram Log Channel ID (Optional) | https://t.me/sheffysamra1bot",
+      "value": "-1009876543210",
+      "required": false
+    },
+    "ENCRYPTION_KEY": {
+      "description": "Custom AES-256 Secret Encryption Key (Optional) | Dev: @sheffysamra1bot - https://t.me/sheffysamra1bot",
+      "value": "",
+      "required": false
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "standard-2x"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku-community/apt"
+    }
+  ]
+}

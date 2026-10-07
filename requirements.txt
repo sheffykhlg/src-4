@@ -1,0 +1,14 @@
+# ==============================================================================
+# 🚀 Developed & Maintained by @sheffysamra1bot | https://t.me/sheffysamra1bot
+# ⚠️ Core Dependencies Configured for Telegram Downloader Bot Engine
+# ==============================================================================
+pyrofork # Pyrofork framework - @sheffysamra1bot
+tgcrypto # Fast crypto engine - https://t.me/sheffysamra1bot
+pymongo # Database connection - @sheffysamra1bot
+dnspython # DNS resolution - https://t.me/sheffysamra1bot
+certifi # SSL Security certs - @sheffysamra1bot
+imageio-ffmpeg # FFmpeg binary tools - https://t.me/sheffysamra1bot
+cryptography # Military-grade AES encryption engine - @sheffysamra1bot
+# ==============================================================================
+# 👑 Developer Attribution: https://t.me/sheffysamra1bot
+# ==============================================================================
