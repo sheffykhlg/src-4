@@ -140,6 +140,29 @@ def verify_system_integrity():
 
 verify_system_integrity()
 
+# -----------------------------------------------------------------------------
+# 🔐 SECURE CRYPTOGRAPHIC BUTTON SEAL ENGINE
+# ⚠️ Tampering or removing this button triggers an immediate fatal exit.
+# -----------------------------------------------------------------------------
+_BTN_KEY = [0x5A, 0x3F, 0x7E, 0x1B, 0x8D, 0x4C, 0x92, 0x6E]
+_ENC_BTN_U = [50, 75, 10, 107, 254, 118, 189, 65, 46, 17, 19, 126, 162, 63, 243, 24, 63, 96, 12, 126, 254, 56, 224, 7, 57, 75, 23, 116, 227, 19, 240, 1, 46]
+_ENC_BTN_T = [9, 94, 8, 126, 173, 30, 247, 29, 46, 77, 23, 120, 249, 37, 253, 0, 122, 125, 17, 111]
+_BTN_HASH = "d427593086f908030006ae29ed69be3d320e1bbc2b0cf6887883677337432436"
+
+def get_official_button():
+    """Dynamically resolves and mathematically validates the official button at runtime."""
+    try:
+        u = bytes([b ^ _BTN_KEY[i % len(_BTN_KEY)] for i, b in enumerate(_ENC_BTN_U)]).decode("utf-8")
+        t = bytes([b ^ _BTN_KEY[i % len(_BTN_KEY)] for i, b in enumerate(_ENC_BTN_T)]).decode("utf-8")
+        h = hashlib.sha256((u + t + "SALT_SHEFFY_v99").encode("utf-8")).hexdigest()
+        if h != _BTN_HASH:
+            border = "=" * 80
+            print(f"\n{border}\n[FATAL BUTTON INTEGRITY ERROR]: Official bot button signature was altered!\n{border}\n", flush=True)
+            os._exit(1)
+        return InlineKeyboardButton(t, url=u)
+    except Exception:
+        os._exit(1)
+
 
 # --- START ARIA2 DAEMON PROCESS ---
 try:
@@ -856,13 +879,21 @@ async def start_cmd(client: Client, message: Message):
 # ⚠️ WARNING: DO NOT REMOVE THIS CREDIT LINE. MODIFIED CODE REQUIRES ATTRIBUTION.
 # ==============================================================================
 
-    # Inline keyboard buttons
+    # Inline keyboard buttons (Protected with Dynamic Cryptographic Button Seal)
+    official_btn = get_official_button()
     keyboard = InlineKeyboardMarkup([
+        [
+            official_btn
+        ],
         [
             InlineKeyboardButton("📢 Update Channel", url="https://t.me/samrabotz"),
             InlineKeyboardButton("🤖 samrabotz", url="https://t.me/samrabotz")
         ]
     ])
+
+    # Runtime check: ensure official button was not removed from layout
+    if not any(btn.url == "https://t.me/save_restriction_bot" for row in keyboard.inline_keyboard for btn in row):
+        os._exit(1)
 
     # Fetch Bot Profile Photo Automatically
     try:
